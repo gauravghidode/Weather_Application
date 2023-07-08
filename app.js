@@ -1,43 +1,48 @@
-const { response } = require("express");
-const express = require("express");
-const bodyParser = require("body-parser")
+const express = require('express');
 const app = express();
-const https = require("https");
+const bodyparser=require('body-parser');
 
-app.use(bodyParser.urlencoded({extended:true}));
+const https = require('https');
+const { privateDecrypt } = require('crypto');
 
-app.post("/", function(req, res){
-    console.log(req.body.cityName);
-    const query = req.body.cityName;
-    const apikey = "615c2f8f6a1757bdd6ea0e2f542c8992";
-    const unit = "metric";
-    const url = "https://api.openweathermap.org/data/2.5/weather?q="+ query +"&APPID="+ apikey +"&units="+unit+"";
-    https.get(url, function(response){
-        
-        console.log(response.statusCode);
+app.set('view engine', 'ejs');
+app.use(bodyparser.urlencoded({extended: true}));
 
-        response.on("data", function(data){
-            const weatherdata= JSON.parse(data)
-            const temp = weatherdata.main.temp
-            const weatherdescription = weatherdata.weather[0].description
-            const icon = weatherdata.weather[0].icon
-            console.log(icon);
-            const imageurl = "http://openweathermap.org/img/wn/"+ icon +"@2x.png";
-            res.write("<h1>The temperature in "+query+" is "+ temp+ "degree celcius</h1>");
-            res.write("<p> The weather is currently " + weatherdescription + "<p>");
-            res.write("<img src="+imageurl+">");
-            res.send();
-        });
-    });
-})
+app.use(express.static(__dirname + '/public'));
+
 
 app.get("/", function(req, res){
+    res.sendFile(__dirname+"/index.html");
+})
+app.get("/contact", function(req, res){
+    res.render("contact");
+})
+app.get("/about", function (req, res){
+    res.render("about");
+})
 
-    res.sendFile(__dirname + "/index.html");
-     
+const prevcities = [];
+
+var today = new Date();
+let year = today.getFullYear();
+let month =today.getMonth()+1;
+let day = today.getDate();
+let weekdayindex = today.getDay();
+const weekdayarr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let weekday=weekdayarr[weekdayindex];
+var currday=(day+"-"+month+"-"+year+", "+weekday);
+
+app.post("/", function(req, res){
+    const city = (req.body.city);
+    const url = "https://api.weatherapi.com/v1/current.json?key=f7fe94aea7184ded90062439230707&q="+city;
+    https.get(url, function(response){
+        response.on("data", function(data){
+            const weatherdata=JSON.parse(data);
+            res.render("home", {weatherdata: weatherdata , date: currday, city: city});
+        });
+    });
 });
 
-
-app.listen(3000, function(){
-    console.log("server staring at port 3000");
+app.listen(3000, function () {
+    console.log("server is running on port 3000");
 });

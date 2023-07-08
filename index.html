@@ -1,17 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather app</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: serif;
+            text-align: center;
+        }
+        
+        nav{
+            min-height: 8vh;
+            background-color: orangered;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        nav h1 {
+            margin: 10px;
+            margin-left: 4vw;
+        }
+
+        nav ul {
+            display: flex;
+            margin-left: 4vw;
+            flex-direction: row;
+            align-items: center;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            height: 82vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container h1{
+            color: orangered;
+            margin:10px;
+        }
+        .container h2{
+            margin: 10px;
+        }
+        input{
+            height: 20px;
+        }
+        button{
+            height: 20px;
+        }
+
+        footer{
+            height: 10vh;
+            background-color: orangered;
+            display: flex;
+            bottom: 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+    <title>Weather App 2</title>
 </head>
+
 <body>
-    <form action="/" method="post">
-        <label for="cityInput">City name: </label>
-        <input id="cityInput" type="text" name="cityName">
-        <button type="submit">Go</button>
-    </form>
-    
+
+    <nav>
+        <h1>WeatherToday</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to WeatherToday</h1>
+        <h2>Enter the name of city to get started</h2>
+        <form action="/" method="post">
+            <input type="text" name="city" id="" placeholder="Enter the city">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy;Gaurav Ghidode</p>
+    </footer>
 </body>
+
 </html>

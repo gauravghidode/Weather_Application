@@ -1,0 +1,53 @@
+<%-include("header")-%>
+<main>
+    <div>
+        <div class="container">
+            <img src="https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/industry/weather-forecast-background.jpg" alt="" id="img-sat">
+            <div class="center-text">
+                <div>
+                    <h2><%=weatherdata.location.name%></h2>
+                    <p><%=date%></p>
+                </div>
+                <div>
+                    <img src=<%=weatherdata.current.condition.icon%> alt="" id="icon">
+                    <p><%=weatherdata.current.condition.text%></p>
+                    <p><%=weatherdata.current.temp_c%>°C,<small> feels like <%=weatherdata.current.feelslike_c%>°C</small></p>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <div>
+            
+            <div class="innercard">
+                <div class="card-item">
+                    <p><b><%=weatherdata.location.name%>, <%=weatherdata.location.region%>, <%=weatherdata.location.country%></b></p>
+                    <p><b>Latitude:</b> <%=weatherdata.location.lat%></p>
+                    <p><b>Longitude:</b> <%=weatherdata.location.lon%></p>
+                    <p><b>Time Zone:</b> <%=weatherdata.location.tz_id%></p>
+                </div>
+                <div class="card-item">
+                    <p><b>Temperature:</b> <%=weatherdata.current.temp_c%>°C / <%=weatherdata.current.temp_f%>°F</p>
+                    <p><b>Feels like: </b><%=weatherdata.current.feelslike_c%>°C / <%=weatherdata.current.feelslike_f%>°F</p>
+                    <p><b>Precipitation: </b><%=weatherdata.current.precip_mm%>mm / <%=weatherdata.current.precip_in%>inch</p>
+                    <p><b>Humidity:</b> <%=weatherdata.current.humidity%></p>
+                </div>
+                <div class="card-item">
+                    <p><b>Wind Speed:</b> <%=weatherdata.current.wind_kph%>kmph / <%=weatherdata.current.wind_mph%>mph</p>
+                    <p><b>Wind Direction: </b><%=weatherdata.current.wind_dir%> at <%=weatherdata.current.wind_degree%>°</p>
+                    <p><b>Pressure:</b> <%=weatherdata.current.pressure_mb%>millibars / <%=weatherdata.current.pressure_in%>inches hg</p>
+                    <p><b>Cloud:</b> <%=weatherdata.current.cloud%></p>
+                </div>
+                <div class="card-item">
+                    <p><b>Visibility: </b><%=weatherdata.current.vis_km%>KM / <%=weatherdata.current.vis_miles%>Miles</p>
+                    <p><b>Ultraviolet level:</b> <%=weatherdata.current.uv%></p>
+                    <p><b>Gust: </b><%=weatherdata.current.gust_kph%>kmph / <%=weatherdata.current.gust_mph%>mph</p>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</main>    
+<%-include("footer")-%>
